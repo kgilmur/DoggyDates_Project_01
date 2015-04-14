@@ -1,0 +1,93 @@
+<% include ../partials/header %>
+
+
+
+<div class="page-container">
+<div class="dbsearch top container text-center">
+
+  </div>
+
+
+  <!-- Yelp Search Page -->
+
+
+  <div class="container">
+    <div class="row row-offcanvas row-offcanvas-left">
+
+      <!-- Side Search Filters -->
+      <div class="col-sm-8 col-sm-4 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div data-spy="affix" data-offset-top="45" data-offset-bottom="90" class="">
+          <form class="form-group form-horizontal">
+
+
+              <!-- Form -->
+              <legend class="text-center">Filter Results</legend>
+
+              <!-- Dog Allowed Dropdown Selector -->
+              <div class="form-group">
+                <label class="col-md-5 control-label" for="dbfilterdogsallowed">Dogs Allowed:</label>
+                <div class="col-md-6">
+                  <select id="dbfilterdogsallowed" name="dbfilterdogsallowed" class="form-control">
+                    <option value="1" class="">No Preference</option>
+                    <option value="2" class="">Patio Only</option>
+                    <option value="3" class="">Inside</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Yelp Rating Dropdown Selector -->
+              <div class="form-group">
+                <label class="col-md-5 control-label" for="dbfilteryelprating">Yelp Rating:</label>
+                <div class="col-md-6">
+                  <select id="dbfilteryelprating" name="dbfilteryelprating" class="form-control">
+                    <option value="1" class="">No Preference</option>
+                    <option value="2" class="">Highest First</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group text-center">
+              <label class="text-center" for="dbfilteryelprating">Can't find what you are looking for?</label>
+              <a class="btn btn-primary btn-xs btn-block" href="/yelpsearchpage">Search for More</a>
+              </div>
+          </form>
+        </div>
+      </div>
+
+
+      <!-- Result Divs -->
+      <div class="col-sm-12 col-sm-8" id="dbresults" data-spy="scroll" data-target="#sidebar-nav">
+
+        <% dbdata.forEach(function(dbresult, idx){ %>
+
+        <div class="well">
+          <p class=""><strong>Restaurant Name: </strong><%= dbresult.name %></p>
+          <p class=""><strong>Address: </strong><%= dbresult.address %></p>
+          <p class=""><strong>Phone Number: </strong><%= dbresult.phone %></p>
+          <p class=""><strong>Yelp Rating: </strong><%= dbresult.yelpRating %></p>
+          <p class=""><strong>Food Types: </strong><%= dbresult.foodType %></p>
+      <form class="dbresult form" action="/dbresultstofavorites" method="post">
+      <input type="hidden" name="name" value="<%= dbresult.name %>">
+      <input type="hidden" name="address" value="<%= dbresult.address %>">
+      <input type="hidden" name="phone" value="<%= dbresult.phone %>">
+      <input type="hidden" name="yelpRating" value="<%= dbresult.rating %>">
+      <input type="hidden" name="foodType" value="<%= dbresult.categories %>">
+
+      <button type="submit" class="btn btn-primary btn-xs btn-block" id="addtofavoritesbutton">Add to Favorites</button>
+    </form>
+
+      </div>
+
+      <% }) %>
+
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+<% include ../partials/footer %>

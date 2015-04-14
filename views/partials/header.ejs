@@ -22,15 +22,14 @@
             </div>
             <div class="modal-body">
 
-            <form class="form-horizontal">
+            <form class="form-horizontal" id="signupform" method="POST" action="/auth/">
               <fieldset>
 
                 <!-- Text input-->
                 <div class="control-group">
                   <label class="control-label" for="signupname"></label>
                   <div class="controls">
-                    <input id="signupname" name="signupname" type="text" placeholder="What is your name?" class="form-control input-xlarge">
-
+                    <input id="signupname" name="name" type="text" placeholder="What is your name?" class="form-control input-xlarge">
                   </div>
                 </div>
 
@@ -39,7 +38,7 @@
                 <div class="control-group">
                   <label class="control-label" for="signupemailinput"></label>
                   <div class="controls">
-                    <input id="signupemailinput" name="signupemailinput" type="text" placeholder="What is your email?" class="form-control input-xlarge">
+                    <input id="signupemailinput" name="email" type="text" placeholder="What is your email?" class="form-control input-xlarge">
 
                   </div>
                 </div>
@@ -48,7 +47,7 @@
                 <div class="control-group">
                   <label class="control-label" for="passwordsignupinput"></label>
                   <div class="controls">
-                    <input id="passwordsignupinput" name="passwordsignupinput" type="password" placeholder="What password would you like?" class="form-control input-xlarge">
+                    <input id="passwordsignupinput" name="password" type="password" placeholder="What password would you like?" class="form-control input-xlarge">
 
                   </div>
                 </div>
@@ -79,17 +78,19 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
                   <h3 class="">Hello Again!</h3>
+                  <div class="login-modal-alert alert alert-danger hidden"> User not found. Please check your information and try agian. If you are new, please use the 'Sign up' link in the upper right-hand side of your screen.</div>
+
             </div>
             <div class="modal-body">
 
-            <form class="form-horizontal">
+            <form class="form-horizontal" id="loginform" method="POST" action="/auth/login">
               <fieldset>
 
                 <!-- Text input-->
                 <div class="control-group">
                   <label class="control-label" for="loginemailinput"></label>
                   <div class="controls">
-                    <input id="loginemailinput" name="loginemailinput" type="text" placeholder="Enter your email" class="form-control input-xlarge">
+                    <input id="loginemailinput" name="email" type="text" placeholder="Enter your email" class="form-control input-xlarge">
 
                   </div>
                 </div>
@@ -98,7 +99,7 @@
                 <div class="control-group">
                   <label class="control-label" for="passwordlogininput"></label>
                   <div class="controls">
-                    <input id="passwordlogininput" name="passwordlogininput" type="password" placeholder="Enter your password" class="form-control input-xlarge">
+                    <input id="passwordlogininput" name="password" type="password" placeholder="Enter your password" class="form-control input-xlarge">
 
                   </div>
                 </div>
@@ -124,19 +125,32 @@
 <!-- Navbar -->
 
 <div class="navcontainer">
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="navbar-header"><a class="navbar-brand" href="#">Brand</a>
-
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="#" class="">Home</a></li>
-            <li><a href="#" class="searchnav">Search</a></li>
-            <li><a href="#" class="favoritenav">Favorites</a></li>
-            <li><a href="#" class="aboutnav">About</a></li>
-            <li class="divider-vertical"></li>
-            <li><a href="#" id="openLogin" class="loginnav">Login</a></li>
-            <li><a href="#" id="openSignup" class="signupnav">Sign Up</a></li>
-        </ul>
+  <div class="navbar navbar-default navbar-fixed-top">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <div class="navbar-header"><a class="navbar-brand" href="#">Brand</a>
 
     </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="/" class="">Home</a></li>
+        <li><a href="/" class="searchnav">Search</a></li>
+        <li><a href="/favorites" class="favoritenav">Favorites</a></li>
+        <li><a href="#" class="aboutnav">About</a></li>
+        <li class="divider-vertical"></li>
+
+        <% if(currentUser) { %>
+          <li><a href="/auth/logout" class="logoutnav">Logout</a></li>
+        <% }else{ %>
+          <li><a href="#" id="openLogin" class="loginnav">Login</a></li>
+          <li><a href="#" id="openSignup" class="signupnav">Sign Up</a></li>
+        <% } %>
+      </ul>
+    </div>
+
+  </div>
 </div>
