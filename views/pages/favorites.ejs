@@ -1,23 +1,27 @@
 <% include ../partials/header %>
 
 <div class="favoriteheadingdiv">
-  <h1 class="favoriteheading">Favorites</h1>
+  <h1 class="favoriteheading text-center">Favorites</h1>
 </div>
 
 <div class="col-sm-10 col-sm-10 col-sm-offset-1" id="favorites" data-spy="scroll">
 
- <div class="well">
-          <% faves.forEach(function(faveresult, idx){ %>
+  <% faves.forEach(function(faveresult, idx){ %>
 
-        <div class="well">
-          <p class=""><strong>Restaurant Name: </strong><%= faveresult.name %></p>
-          <p class=""><strong>Address: </strong><%= faveresult.address %></p>
-          <p class=""><strong>Phone Number: </strong><%= faveresult.phone %></p>
-          <p class=""><strong>Yelp Rating: </strong><%= faveresult.yelpRating %></p>
-          <p class=""><strong>Food Types: </strong><%= faveresult.FoodType %></p>
-</div>
+  <div class="well" id="favoritediv">
+    <p class=""><strong>Restaurant Name: </strong><%= faveresult.name %></p>
+    <p class=""><strong>Address: </strong><%= faveresult.address %></p>
+    <p class=""><strong>Phone Number: </strong><%= faveresult.phone %></p>
+    <p class=""><strong>Yelp Rating: </strong><%= faveresult.yelpRating %></p>
+    <p class=""><strong>Food Types: </strong><%= faveresult.FoodType %></p>
+    <form class="deletefromfavbutton" action="/favorites" method="post">
+      <input type="hidden" name="id" value="<%= faveresult.id %>">
+      <button type="submit" class="delete btn btn-primary btn-xs btn-block" id="delete">Delete from List</button>
+    </form>
+  </div>
 
-<% }); %>
+
+  <% }); %>
 
 
 </div>

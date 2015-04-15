@@ -42,6 +42,13 @@ router.post("/", function(req,res) {
    })
 
 
+router.delete('/',function(req,res) {
+  db.favorite.destroy({where:{id:req.body.id}}).then(function() {
+    res.send({result:true});
+  });
+res.send(req.body);
+console.log('test',req.body);
+});
 
 
 

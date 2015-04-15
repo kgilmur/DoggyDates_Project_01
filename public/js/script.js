@@ -29,6 +29,46 @@ $('#signupform').on('submit', function(e) {
 
 })
 
+
+  //Delete from Favorites page
+// $('#delete').on('click', function(e){
+//   e.preventDefault();
+//   var nearestBtn = $(this).closest("div");
+//   var myUrl = $(this).attr('value');
+//   var thisDeleteButton = $(this).serialize();
+//   console.log(myUrl);
+
+//   $.ajax({
+//     method:'DELETE',
+//     url:'/favorites/'+myUrl
+//   }).done(function(){
+//    $(nearestBtn).fadeOut();
+//  });
+// });
+
+  $('.delete').on('click',function(e) {
+    e.preventDefault();
+    var delBtn = $(this);
+    var form = $(this).closest('form');
+    var data = form.serialize();
+    if(confirm("Are you sure you want to delete this?")) {
+    var myUrl = $(this).attr('action');
+    console.log('data:', data)
+      $.ajax({
+        method: 'DELETE',
+        url:myUrl,
+        data:data
+      }).done(function(data) {
+        //reload page or...
+        //remove div row from dom
+        delBtn.closest('div').fadeOut('slow',function() {
+          $(this).remove();
+        })
+      });
+    }
+  });
+
+
 //dbsearch to yelp search button
 
 
