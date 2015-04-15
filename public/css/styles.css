@@ -65,4 +65,10 @@ body {
   margin-top: 50px;
 }
 
+/*Database Results*/
+
+.patioonly, .allowedinside {
+  display: inline-block;
+}
+
 

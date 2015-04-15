@@ -1,21 +1,18 @@
 var express = require("express");
 var bodyParser = require('body-parser');
 // var moviesCtrl = require("./controllers/movies");
-// var favoritesCtrl = require("./controllers/favorites");
+var favoritesCtrl = require("./controllers/favorites");
+var authCtrl = require('./controllers/auth');
+var featureCtrl = require('./controllers/features');
 var app = express();
 var flash = require('connect-flash');
 var session = require('express-session');
 var db = require('./models');
-var authCtrl = ('./controllers/auth')
 
 app.use(express.static(__dirname+'/public'));
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.set("view engine", "ejs");
-// app.use("/movies", moviesCtrl);
-// app.use("/favorites", favoritesCtrl);
-
-// app.use('/auth', authCtrl);
 
 
 //SESSION
@@ -41,10 +38,6 @@ app.use(function(req,res,next){
   next();
 });
 
-//ROUTES
-// app.use('/auth/logout',require('./controllers/main.js'));
-app.use('/auth',require('./controllers/auth.js'));
-app.use('/yelp',require('./controllers/yelp.js'));
 
 
 app.get("/", function(req, res) {
@@ -61,14 +54,14 @@ app.get("/dbsearchresults", function(req, res) {
 //   res.render("pages/yelpsearchresults")
 // })
 
-app.get("/favorites", function(req, res) {
-  if (req.getUser()) {
-  res.render("pages/favorites")
-  } else {
-    // req.flash('danger','You must be logged in to access that page')
-    res.send("Please login to view the Favorites page");
-  }
-})
+// app.get("/favorites", function(req, res) {
+//   if (req.getUser()) {
+//   res.render("pages/favorites")
+//   } else {
+//     // req.flash('danger','You must be logged in to access that page')
+//     res.send("Please login to view the Favorites page");
+//   }
+// })
 
 // app.get("/yelpsearchresults", function(req, res) {
 //   res.render("pages/yelpsearch")
@@ -92,6 +85,7 @@ app.get("/dbsearch", function(req, res) {
   db.venue.findAll().then(function(dbdata) {
     // console.log(data);
       res.render("pages/dbsearchresults",{dbdata:dbdata});
+      // res.send(dbdata);
     })
   })
 
@@ -103,6 +97,15 @@ app.get("/yelpsearchpage", function(req, res) {
 })
 
 
+//ROUTES
+// app.use('/auth/logout',require('./controllers/main.js'));
+app.use('/auth',require('./controllers/auth.js'));
+app.use('/yelp',require('./controllers/yelp.js'));
+app.use('/features', require('./controllers/features.js'));
+// app.use("/movies", moviesCtrl);
+app.use("/favorites", favoritesCtrl);
+
+// app.use('/auth', authCtrl);
 
 app.listen(3000, function() {
   console.log("Server started on port 3000")

@@ -61,20 +61,38 @@
         <% dbdata.forEach(function(dbresult, idx){ %>
 
         <div class="well">
+          <div class="col-sm-8 col-sm-8">
           <p class=""><strong>Restaurant Name: </strong><%= dbresult.name %></p>
           <p class=""><strong>Address: </strong><%= dbresult.address %></p>
           <p class=""><strong>Phone Number: </strong><%= dbresult.phone %></p>
           <p class=""><strong>Yelp Rating: </strong><%= dbresult.yelpRating %></p>
           <p class=""><strong>Food Types: </strong><%= dbresult.foodType %></p>
-      <form class="dbresult form" action="/dbresultstofavorites" method="post">
+          </div>
+
+      <form class="patioonly" action="/features/patioonly" method="post">
+      <input type="hidden" value="1" name="patioonlyinput">
+      <input type="hidden" name="venueId" value="<%= dbresult.id %>">
+      <button type="submit" class="btn btn-primary btn-xs" id="patioonly">Patio Only</button>
+      </form>
+
+      <form class="allowedinside" action="/inside" method="post">
+      <input type="hidden" name="venueId" value="<%= dbresult.id %>">
+      <button type="submit" class="btn btn-primary btn-xs" id="inside">Allowed Inside</button>
+      </form>
+
+      <form class="dbresult form" action="/favorites" method="post">
+      <input type="hidden" name="venueId" value="<%= dbresult.id %>">
       <input type="hidden" name="name" value="<%= dbresult.name %>">
       <input type="hidden" name="address" value="<%= dbresult.address %>">
       <input type="hidden" name="phone" value="<%= dbresult.phone %>">
       <input type="hidden" name="yelpRating" value="<%= dbresult.rating %>">
-      <input type="hidden" name="foodType" value="<%= dbresult.categories %>">
-
+      <input type="hidden" name="foodType" value="<%= dbresult.foodType %>">
       <button type="submit" class="btn btn-primary btn-xs btn-block" id="addtofavoritesbutton">Add to Favorites</button>
-    </form>
+      </form>
+
+
+
+
 
       </div>
 
