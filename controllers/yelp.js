@@ -25,9 +25,10 @@ router.get("/search", function(req, res) {
       return {
         name: data.name,
         address: data.location.display_address,
-        phone: data.phone,
+        phone: data.display_phone,
         rating: data.rating,
-        categories: data.categories
+        categories: data.categories,
+        neighborhood: data.location.neighborhoods
       };
     });
     res.render('pages/yelpsearchresults',{yelpResults:info});

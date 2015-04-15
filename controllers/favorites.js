@@ -35,10 +35,7 @@ router.post("/", function(req,res) {
   var user= req.getUser();
   var ratings = Math.round(req.body.yelpRating);
   db.favorite.findOrCreate({where:{userId:user.id,name:req.body.name,address:req.body.address,phone:req.body.phone,yelpRating:ratings,FoodType:req.body.foodType}}).spread(function(favoritedata, created) {
-  // res.send(favoritedata);
-  // res.redirect("/pages/favorites");
      favoritedata.save().then(function() {
-      // console.log("user:" + user.id + "venue:" + req.body.venueId);
       res.redirect("/favorites");
     })
    })

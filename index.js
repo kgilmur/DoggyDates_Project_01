@@ -82,12 +82,22 @@ app.post("/yelptodb", function(req, res) {
 
 app.get("/dbsearch", function(req, res) {
   var ratings = Math.round(req.body.yelpRating);
-  db.venue.findAll().then(function(dbdata) {
+  db.venue.findAll({
+    include:[db.feature]
+  }).then(function(dbdata) {
+
     // console.log(data);
-      res.render("pages/dbsearchresults",{dbdata:dbdata});
-      // res.send(dbdata);
-    })
+    // res.send(dbdata);
+
+    var locals = {
+      dbdata:dbdata
+    };
+
+    res.render("pages/dbsearchresults",locals);
+
+
   })
+})
 
 
 
