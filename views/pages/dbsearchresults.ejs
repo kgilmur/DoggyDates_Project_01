@@ -28,9 +28,9 @@
                 <label class="col-md-5 control-label" for="dbfilterdogsallowed">Dogs Allowed:</label>
                 <div class="col-md-6">
                   <select id="dbfilterdogsallowed" name="dbfilterdogsallowed" class="form-control">
-                    <option value="1" class="">No Preference</option>
-                    <option value="2" class="">Patio Only</option>
-                    <option value="3" class="">Inside</option>
+                    <option value="0" class="">No Preference</option>
+                    <option value="1" class="">Patio Only</option>
+                    <option value="2" class="">Inside</option>
                   </select>
                 </div>
               </div>
@@ -61,28 +61,29 @@
         <% dbdata.forEach(function(dbresult, idx){ %>
 
         <div class="well">
-        <div class="col-sm-10 col-sm-12">
+        <div class="col-sm-10">
             <p class=""><strong>Restaurant Name: </strong><%= dbresult.name %></p>
             <p class=""><strong>Address: </strong><%= dbresult.address %></p>
             <p class=""><strong>Phone Number: </strong><%= dbresult.phone %></p>
             <p class=""><strong>Yelp Rating: </strong><%= dbresult.yelpRating %></p>
             <p class=""><strong>Food Types: </strong><%= dbresult.foodType %></p>
-          </div>
-
+</div>
+<div class="col-sm-2">
           <form class="patioonly" action="/features/patioonly" method="post">
             <input type="hidden" value="1" name="patioonlyinput">
             <input type="hidden" name="venueId" value="<%= dbresult.id %>">
-            <button type="submit" class="btn btn-primary btn-xs" id="patioonly">Patio Only</button>
+            <input type="image" src="./images/outside copy.png" name="patioonly" class="btTxt submit" id="patioonly">
             <p>Votes: <%= dbresult.features.filter(function(f){ return f.type==1 }).length %></p>
           </form>
 
           <form class="allowedinside" action="/features/inside" method="post">
             <input type="hidden" value="2" name="insideinput">
             <input type="hidden" name="venueId" value="<%= dbresult.id %>">
-            <button type="submit" class="btn btn-primary btn-xs" id="inside">Allowed Inside</button>
+            <input type="image" src="./images/inside copy.png" name="inside" class="btTxt submit" id="inside">
             <p>Votes: <%= dbresult.features.filter(function(f){ return f.type==2 }).length %></p>
           </form>
 
+</div>
           <form class="dbresult form" action="/favorites" method="post">
             <input type="hidden" name="venueId" value="<%= dbresult.id %>">
             <input type="hidden" name="name" value="<%= dbresult.name %>">
@@ -90,7 +91,7 @@
             <input type="hidden" name="phone" value="<%= dbresult.phone %>">
             <input type="hidden" name="yelpRating" value="<%= dbresult.rating %>">
             <input type="hidden" name="foodType" value="<%= dbresult.foodType %>">
-            <button type="submit" class="btn btn-primary btn-xs btn-block" id="addtofavoritesbutton">Add to Favorites</button>
+            <button type="submit" class="addtofavorites btn btn-primary btn-xs btn-block" id="addtofavoritesbutton">Add to Favorites</button>
           </form>
 
 

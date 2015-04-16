@@ -71,7 +71,7 @@ router.post('/login',function(req,res){
               };
               // res.send("Your password matched")
               // res.send(req.session.user)
-              res.redirect("/")
+              res.redirect("/dbsearch")
 
 
 

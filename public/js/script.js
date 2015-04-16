@@ -30,21 +30,18 @@ $('#signupform').on('submit', function(e) {
 })
 
 
-  //Delete from Favorites page
-// $('#delete').on('click', function(e){
-//   e.preventDefault();
-//   var nearestBtn = $(this).closest("div");
-//   var myUrl = $(this).attr('value');
-//   var thisDeleteButton = $(this).serialize();
-//   console.log(myUrl);
-
-//   $.ajax({
-//     method:'DELETE',
-//     url:'/favorites/'+myUrl
-//   }).done(function(){
-//    $(nearestBtn).fadeOut();
-//  });
-// });
+  // $('.dbresult').on('click', function(e) {
+  //   e.preventDefault();
+  //   var data = $(this).serialize();
+  //   var url = $(this).attr('action');
+  //     $.ajax({
+  //       method:'POST',
+  //       url:url,
+  //       data:data
+  //     }).done(function(data) {
+  //       location.href="/dbsearch";
+  //     })
+  // });
 
   $('.delete').on('click',function(e) {
     e.preventDefault();

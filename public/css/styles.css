@@ -21,6 +21,13 @@ body {
     margin-right: 0;
 }
 
+/*navbar*/
+
+#navbarimage {
+  max-width:40px;
+  margin-top: -7px;
+}
+
 /*Home Page*/
 
 .Absolute-Center {
@@ -52,11 +59,22 @@ body {
   margin-top: 65px;
 }
 
+#patioonly {
+  width: 50px;
+}
+
+#inside {
+  width: 50px;
+}
+
+.inside {
+  text-align: center;
+}
 
 /*Yelp Search Page*/
 
 .yelpsearchdiv {
-  margin-top: 45px;
+  margin-top: 75px;
 }
 
 /*Yelp Search Results Page*/
@@ -65,7 +83,17 @@ body {
   margin-top: 50px;
 }
 
-/*Database Results*/
+/*about page*/
+
+.about {
+margin-top: 50px;
+}
+
+.about p {
+  margin: 40px;
+}
+
+/*Database Results
 
 /*.patioonly, .allowedinside {
   display: inline-block;

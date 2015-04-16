@@ -1,16 +1,16 @@
 <% include ../partials/header %>
 
 
-<div class="col-sm-10 col-sm-10 col-sm-offset-1" id="yelpresults" data-spy="scroll" data-target="#sidebar-nav">
+<div class="col-sm-10 col-sm-10 col-sm-offset-1" id="yelpresults">
 
 <% yelpResults.forEach(function(result, idx){ %>
 
  <div class="well">
-  <p class=""><%= result.name %></p>
-  <p class=""><%= result.address %></p>
-  <p class=""><%= result.phone %></p>
-  <p class=""><%= result.rating %></p>
-  <p class=""><%= result.categories %></p>
+  <p class=""><strong>Name: </strong><%= result.name %></p>
+  <p class=""><strong>Address: </strong><%= result.address %></p>
+  <p class=""><strong>Phone Number: </strong><%= result.phone %></p>
+  <p class=""><strong>Rating: </strong><%= result.rating %></p>
+  <p class=""><strong>Food Types: </strong><%= result.categories %></p>
   <form class="yelptodb form" action="/yelptodb" method="post">
       <input type="hidden" name="name" value="<%= result.name %>">
       <input type="hidden" name="address" value="<%= result.address %>">
@@ -18,15 +18,12 @@
       <input type="hidden" name="yelpRating" value="<%= result.rating %>">
       <input type="hidden" name="foodType" value="<%= result.categories %>">
 
-      <button type="hidden" class="btn btn-primary btn-xs btn-block" id="addtodbbutton">Add</button>
+      <button type="hidden" class="btn btn-primary btn-xs btn-block" id="addtodbbutton">Add to Our List!</button>
     </form>
 </div>
 
  <% }) %>
 
-<div class="well">
-  <p class="">Result Two</p>
-</div>
 
 
 

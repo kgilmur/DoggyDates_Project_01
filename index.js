@@ -69,16 +69,39 @@ app.get("/dbsearchresults", function(req, res) {
 
 app.post("/yelptodb", function(req, res) {
   var ratings = Math.round(req.body.yelpRating);
-  db.venue.findOrCreate({where:{name: req.body.name,address:req.body.address,phone:req.body.phone,yelpRating:ratings,foodType:req.body.foodType}}).spread(function(data, created) {
-    // if(data.name == "") {
-    data.save().then(function() {
+  db.venue.findOrCreate({
+    where:{name: req.body.name,address:req.body.address},
+    defaults:{name: req.body.name,address:req.body.address,phone:req.body.phone,yelpRating:ratings,foodType:req.body.foodType}
+  }).spread(function(data, created) {
+    if(created) {
       res.redirect("/");
-    })
-    // } else {
+    } else {
+      res.send("Already Exists")
+    // data.save().then(function() {
     //   res.send("Already Exists")
-    // }
+      // })
+    }
+  }).catch(function(err){
+    res.send(err);
   })
 })
+
+// app.post("/yelptodb", function(req, res) {
+//   var ratings = Math.round(req.body.yelpRating);
+//   db.venue.find({where:{name: req.body.name}}).spread(function(data, found) {
+//     if(found) {
+//       res.send("Already Exists");
+//     } else {
+//       db.venue.create({where:{name: req.body.name,address:req.body.address,phone:req.body.phone,yelpRating:ratings,foodType:req.body.foodType}}).then(function() {
+//           res.redirect("/");
+//         })
+//       }
+//   })
+// })
+
+
+
+
 
 app.get("/dbsearch", function(req, res) {
   var ratings = Math.round(req.body.yelpRating);
@@ -87,6 +110,7 @@ app.get("/dbsearch", function(req, res) {
   }).then(function(dbdata) {
 
     // console.log(data);
+
     // res.send(dbdata);
 
     var locals = {
@@ -107,12 +131,16 @@ app.get("/yelpsearchpage", function(req, res) {
 })
 
 
+app.get("/about", function(req, res) {
+  res.render("pages/about")
+})
+
+
 //ROUTES
 // app.use('/auth/logout',require('./controllers/main.js'));
 app.use('/auth',require('./controllers/auth.js'));
 app.use('/yelp',require('./controllers/yelp.js'));
 app.use('/features', require('./controllers/features.js'));
-// app.use("/movies", moviesCtrl);
 app.use("/favorites", favoritesCtrl);
 
 // app.use('/auth', authCtrl);
