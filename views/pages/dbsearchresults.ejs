@@ -2,7 +2,10 @@
 
 
 
+
+
 <div class="page-container">
+
 <div class="dbsearch top container text-center">
 
   </div>
@@ -16,7 +19,7 @@
 
       <!-- Side Search Filters -->
       <div class="col-sm-8 col-sm-4 sidebar-offcanvas" id="sidebar" role="navigation">
-        <div data-spy="affix" data-offset-top="45" data-offset-bottom="90" class="">
+        <div data-spy="affix" data-offset-top="45" data-offset-bottom="90" class="hidden">
           <form class="form-group form-horizontal">
 
 
@@ -45,18 +48,19 @@
                   </select>
                 </div>
               </div>
-
+ </div>
               <div class="form-group text-center">
               <label class="text-center" for="dbfilteryelprating">Can't find what you are looking for?</label>
               <a class="btn btn-primary btn-xs btn-block" href="/yelpsearchpage">Search for More</a>
               </div>
           </form>
-        </div>
+
       </div>
 
 
       <!-- Result Divs -->
       <div class="col-sm-12 col-sm-8" id="dbresults" data-spy="scroll" data-target="#sidebar-nav">
+
 
         <% dbdata.forEach(function(dbresult, idx){ %>
 
@@ -72,14 +76,14 @@
           <form class="patioonly" action="/features/patioonly" method="post">
             <input type="hidden" value="1" name="patioonlyinput">
             <input type="hidden" name="venueId" value="<%= dbresult.id %>">
-            <input type="image" src="./images/outside copy.png" name="patioonly" class="btTxt submit" id="patioonly">
+            <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to tell everyone this restaurant allows dogs on the patio only!"><input type="image" src="./images/outside copy.png" name="patioonly" class="btTxt submit" id="patioonly"></a>
             <p>Votes: <%= dbresult.features.filter(function(f){ return f.type==1 }).length %></p>
           </form>
 
           <form class="allowedinside" action="/features/inside" method="post">
             <input type="hidden" value="2" name="insideinput">
             <input type="hidden" name="venueId" value="<%= dbresult.id %>">
-            <input type="image" src="./images/inside copy.png" name="inside" class="btTxt submit" id="inside">
+            <a href="#" data-toggle="tooltip" data-placement="top" title="Click here to tell everyone this restaurant allows dogs on the patio AND inside!"><input type="image" src="./images/inside copy.png" name="inside" class="btTxt submit" id="inside"></a>
             <p>Votes: <%= dbresult.features.filter(function(f){ return f.type==2 }).length %></p>
           </form>
 
@@ -110,3 +114,4 @@
 
 
 <% include ../partials/footer %>
+

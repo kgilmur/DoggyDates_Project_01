@@ -29,6 +29,7 @@ $('#signupform').on('submit', function(e) {
 
 })
 
+$("[data-toggle=tooltip]").tooltip();
 
   // $('.dbresult').on('click', function(e) {
   //   e.preventDefault();

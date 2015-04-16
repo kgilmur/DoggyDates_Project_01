@@ -5,8 +5,8 @@ var favoritesCtrl = require("./controllers/favorites");
 var authCtrl = require('./controllers/auth');
 var featureCtrl = require('./controllers/features');
 var app = express();
-var flash = require('connect-flash');
 var session = require('express-session');
+var flash = require('connect-flash');
 var db = require('./models');
 
 app.use(express.static(__dirname+'/public'));
@@ -23,6 +23,18 @@ app.use(session({
 }))
 
 app.use(flash());
+
+app.use(function(req,res,next){
+  res.locals.alerts=req.flash();
+  next();
+});
+
+// app.use('*', function(req,res,next) {
+//   var alerts = req.flash();
+//   res.locals.alerts = alerts;
+//   next();
+// });
+
 
 
 //MIDDLEWARE
@@ -76,7 +88,9 @@ app.post("/yelptodb", function(req, res) {
     if(created) {
       res.redirect("/");
     } else {
-      res.send("Already Exists")
+      req.flash("danger","This restaurant is already in our system! Please see the list of dog-friendly restaurants on this page!");
+      res.redirect("/dbsearch");
+      // res.send("Already Exists")
     // data.save().then(function() {
     //   res.send("Already Exists")
       // })
@@ -113,11 +127,11 @@ app.get("/dbsearch", function(req, res) {
 
     // res.send(dbdata);
 
-    var locals = {
+    var counterlocals = {
       dbdata:dbdata
     };
 
-    res.render("pages/dbsearchresults",locals);
+    res.render("pages/dbsearchresults",counterlocals);
 
 
   })
@@ -134,6 +148,8 @@ app.get("/yelpsearchpage", function(req, res) {
 app.get("/about", function(req, res) {
   res.render("pages/about")
 })
+
+
 
 
 //ROUTES

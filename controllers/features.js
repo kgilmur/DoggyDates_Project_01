@@ -3,6 +3,8 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var request = require("request");
 var db = require('../models');
+var flash = require('connect-flash');
+
 
 
 router.use(bodyParser.urlencoded({extended: false}));
@@ -23,11 +25,16 @@ router.use(bodyParser.urlencoded({extended: false}));
 
 router.post("/patioonly", function(req,res){
   var user= req.getUser();
-  if (!user) { return res.send("Log in")}
+  if (!user) {
+    req.flash("danger","You are not logged in, please login or sign up in order to vote!")};
+    // return res.send("Log in")}
   db.feature.count({where:{userId:user.id,venueId:req.body.venueId}}).then(function(count){
     console.log("COUNT!!!", count);
     if(count > 0){
-      return res.send({error: "You have already voted"})
+      // return res.send({error: "You have already voted"})
+      // alert("already voted")
+      req.flash("danger","You have already voted for this restaurant!");
+      res.redirect("/dbsearch");
     }else{
       db.feature.findOrCreate({where:{userId:user.id,venueId:req.body.venueId,type:req.body.patioonlyinput}})
         .spread(function(featureData, created){
@@ -46,11 +53,14 @@ router.post("/patioonly", function(req,res){
 
 router.post("/inside", function(req,res){
   var user= req.getUser();
-  if (!user) { return res.send("Please log in before voting")}
+  if (!user) {
+    req.flash("danger","You are not logged in, please login or sign up in order to vote!")};
+    // return res.send("Please log in before voting")}
   db.feature.count({where:{userId:user.id,venueId:req.body.venueId}}).then(function(count){
     console.log("COUNT!!!", count);
     if(count > 0){
-      return res.send({error: "You have already voted for this restaurant"})
+      req.flash("danger","You have already voted for this restaurant!");
+      // return res.send({error: "You have already voted for this restaurant"})
     }else{
       db.feature.findOrCreate({where:{userId:user.id,venueId:req.body.venueId,type:req.body.insideinput}})
         .spread(function(featureData, created){

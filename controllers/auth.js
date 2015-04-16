@@ -2,7 +2,7 @@ var db = require('../models');
 var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt');
-
+var flash = require('connect-flash');
 
 //GET /auth/signup ***** MODALS
 //display sign up form
@@ -25,7 +25,10 @@ router.post('/',function(req,res){
           if(created) {
             res.redirect('/');
           } else {
-            res.send("Your email already exists! Please log in");
+            req.flash("danger","Your email already exists in our system. Please login to continue, or signup with a new email.");
+            es.redirect("/dbsearch");
+
+            // res.send("Your email already exists! Please log in");
           }
       })
       .catch(function(error) {
@@ -76,11 +79,15 @@ router.post('/login',function(req,res){
 
 
             } else {
-              res.send({error:  'Invalid password'})
+              req.flash("danger","Your password is invalid!");
+              res.redirect("/dbsearch");
+              // res.send({error:  'Invalid password'})
             }
           })
         } else {
-          res.send({error: 'Unknown user, Please check your information'})
+          req.flash("danger","We don't recognize your email, please check your information and try again. If you aren't a member, please signup now!");
+          res.redirect("/dbsearch");
+          // res.send({error: 'Unknown user, Please check your information'})
         }
       })
 

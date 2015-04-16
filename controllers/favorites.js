@@ -4,9 +4,11 @@ var bodyParser = require('body-parser');
 var router = express.Router();
 var request = require("request");
 var db = require('../models');
+var flash = require('connect-flash');
 
 
 router.use(bodyParser.urlencoded({extended: false}));
+
 
 
 
@@ -25,7 +27,9 @@ router.get("/", function(req,res){
        // res.send(faves);
      })
        } else {
-      res.send("Please login to set up your Favorites page");
+      // res.send("Please login to set up your Favorites page");
+      req.flash("danger","Please login or signup to view your favorites page!");
+      res.redirect("/dbsearch");
 
      }
    })
