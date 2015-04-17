@@ -23,18 +23,18 @@ router.post('/',function(req,res){
   db.user.findOrCreate({where:userQuery,defaults:userData})
   .spread(function(user,created) {
     if(created) {
-      res.redirect('/');
+      res.redirect(req.headers.referer);
 
     } else {
       req.flash("danger","Your email already exists in our system. Please login to continue, or signup with a new email.");
-      res.redirect("/");
+      res.redirect(req.headers.referer);
 
             // res.send("Your email already exists! Please log in");
           }
         })
   .catch(function(error) {
     req.flash("danger","Your password must be at least 6 characters in length.");
-    res.redirect("/");
+    res.redirect(req.headers.referer);
     console.log('error',error);
     // res.send(error);
 
@@ -70,19 +70,19 @@ router.post('/login',function(req,res){
               };
               // res.send("Your password matched")
               // res.send(req.session.user)
-              res.redirect("/");
+              res.redirect(req.headers.referer);
 
-
+//res.redirect(req.headers.referer);
 
             } else {
               req.flash("danger","Your password is invalid!");
-              res.redirect("/");
+              res.redirect(req.headers.referer);
               // res.send({error:  'Invalid password'})
             }
           })
         } else {
           req.flash("danger","We don't recognize your email, please check your information and try again. If you aren't a member, please signup now!");
-          res.redirect("/");
+          res.redirect(req.headers.referer);
           // res.send({error: 'Unknown user, Please check your information'})
         }
       })
