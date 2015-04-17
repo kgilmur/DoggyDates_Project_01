@@ -10,6 +10,35 @@ $('#openLogin').click(function(){
   $('#loginmodal').modal({show:true})
 });
 
+//tooltips on vote icons
+$("[data-toggle=tooltip]").tooltip();
+
+
+//Delete from favroties
+
+  $('.delete').on('click',function(e) {
+    e.preventDefault();
+    var delBtn = $(this);
+    var form = $(this).closest('form');
+    var data = form.serialize();
+    if(confirm("Are you sure you want to delete this?")) {
+    var myUrl = $(this).attr('action');
+    console.log('data:', data)
+      $.ajax({
+        method: 'DELETE',
+        url:myUrl,
+        data:data
+      }).done(function(data) {
+        //remove div row from dom
+        delBtn.closest('div').fadeOut('slow',function() {
+          $(this).remove();
+        })
+      });
+    }
+  });
+
+//FAILED ATTEMPTS
+
 //navbar modal form submit for signup
 
 // $('#signupform').on('submit', function(e) {
@@ -29,45 +58,6 @@ $('#openLogin').click(function(){
 
 // })
 
-$("[data-toggle=tooltip]").tooltip();
-
-  // $('.dbresult').on('click', function(e) {
-  //   e.preventDefault();
-  //   var data = $(this).serialize();
-  //   var url = $(this).attr('action');
-  //     $.ajax({
-  //       method:'POST',
-  //       url:url,
-  //       data:data
-  //     }).done(function(data) {
-  //       location.href="/dbsearch";
-  //     })
-  // });
-
-  $('.delete').on('click',function(e) {
-    e.preventDefault();
-    var delBtn = $(this);
-    var form = $(this).closest('form');
-    var data = form.serialize();
-    if(confirm("Are you sure you want to delete this?")) {
-    var myUrl = $(this).attr('action');
-    console.log('data:', data)
-      $.ajax({
-        method: 'DELETE',
-        url:myUrl,
-        data:data
-      }).done(function(data) {
-        //reload page or...
-        //remove div row from dom
-        delBtn.closest('div').fadeOut('slow',function() {
-          $(this).remove();
-        })
-      });
-    }
-  });
-
-
-//dbsearch to yelp search button
 
 
 

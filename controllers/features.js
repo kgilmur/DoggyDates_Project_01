@@ -21,7 +21,7 @@ router.use(bodyParser.urlencoded({extended: false}));
 // })
 
 
-//vote patio only once per user or force user to login
+//vote patio only once per user or tell user to login
 
 router.post("/patioonly", function(req,res){
   var user= req.getUser();

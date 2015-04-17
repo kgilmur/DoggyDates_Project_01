@@ -1,6 +1,5 @@
 var express = require("express");
 var bodyParser = require('body-parser');
-// var moviesCtrl = require("./controllers/movies");
 var favoritesCtrl = require("./controllers/favorites");
 var authCtrl = require('./controllers/auth');
 var featureCtrl = require('./controllers/features');
@@ -21,6 +20,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
+
+//FLASH MUST BE ABOVE MIDDLEWARE BELOW SESSION
 
 app.use(flash());
 
@@ -45,11 +46,9 @@ app.use(function(req,res,next){
 });
 
 
-
+//homepage get
 app.get("/", function(req, res) {
-
   res.render("pages/home")
-
 })
 
 app.get("/dbsearchresults", function(req, res) {
@@ -60,18 +59,12 @@ app.get("/dbsearchresults", function(req, res) {
 //   res.render("pages/yelpsearchresults")
 // })
 
-// app.get("/favorites", function(req, res) {
-//   if (req.getUser()) {
-//   res.render("pages/favorites")
-//   } else {
-//     // req.flash('danger','You must be logged in to access that page')
-//     res.send("Please login to view the Favorites page");
-//   }
-// })
 
 // app.get("/yelpsearchresults", function(req, res) {
 //   res.render("pages/yelpsearch")
 // })
+
+//Post information from Yelp to DB
 
 app.post("/yelptodb", function(req, res) {
   var ratings = Math.round(req.body.yelpRating);
@@ -94,6 +87,7 @@ app.post("/yelptodb", function(req, res) {
   })
 })
 
+//Wrong Attempt to post from yelp to DB
 // app.post("/yelptodb", function(req, res) {
 //   var ratings = Math.round(req.body.yelpRating);
 //   db.venue.find({where:{name: req.body.name}}).spread(function(data, found) {
@@ -110,7 +104,7 @@ app.post("/yelptodb", function(req, res) {
 
 
 
-
+//counts votes on patio and inside icons and displays
 app.get("/dbsearch", function(req, res) {
   var ratings = Math.round(req.body.yelpRating);
   db.venue.findAll({
@@ -147,15 +141,17 @@ app.get("/about", function(req, res) {
 
 
 //ROUTES
-// app.use('/auth/logout',require('./controllers/main.js'));
 app.use('/auth',require('./controllers/auth.js'));
 app.use('/yelp',require('./controllers/yelp.js'));
 app.use('/features', require('./controllers/features.js'));
 app.use("/favorites", favoritesCtrl);
 
-// app.use('/auth', authCtrl);
+
+
 
 app.listen(process.env.PORT || 3000)
 // app.listen(3000, function() {
 //   console.log("Server started on port 3000")
 // })
+
+

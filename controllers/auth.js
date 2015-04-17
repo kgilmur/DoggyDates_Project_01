@@ -5,7 +5,6 @@ var bcrypt = require('bcrypt');
 var flash = require('connect-flash');
 
 //GET /auth/signup ***** MODALS
-//display sign up form
 router.get('/',function(req,res){
     res.render('/');
 });
@@ -43,7 +42,6 @@ router.post('/',function(req,res){
 });
 
 //GET /auth/login
-//display login form
 router.get('/',function(req,res){
     res.render('/');
 });
@@ -72,7 +70,6 @@ router.post('/login',function(req,res){
               // res.send(req.session.user)
               res.redirect(req.headers.referer);
 
-//res.redirect(req.headers.referer);
 
             } else {
               req.flash("danger","Your password is invalid!");
