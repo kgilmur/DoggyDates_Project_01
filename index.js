@@ -29,12 +29,6 @@ app.use(function(req,res,next){
   next();
 });
 
-// app.use('*', function(req,res,next) {
-//   var alerts = req.flash();
-//   res.locals.alerts = alerts;
-//   next();
-// });
-
 
 
 //MIDDLEWARE
@@ -82,7 +76,7 @@ app.get("/dbsearchresults", function(req, res) {
 app.post("/yelptodb", function(req, res) {
   var ratings = Math.round(req.body.yelpRating);
   db.venue.findOrCreate({
-    where:{name: req.body.name,address:req.body.address},
+    where:{name: req.body.name},
     defaults:{name: req.body.name,address:req.body.address,phone:req.body.phone,yelpRating:ratings,foodType:req.body.foodType}
   }).spread(function(data, created) {
     if(created) {

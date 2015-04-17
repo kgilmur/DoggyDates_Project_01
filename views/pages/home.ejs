@@ -1,17 +1,17 @@
-<% include ../partials/header %>
+<% include ../partials/header-main %>
 
 <!-- Home Page Search Form -->
-
+<body id="homepage">
 <div class="container">
   <div class="row">
     <div class="Absolute-Center is-Responsive">
-      <form class="form-horizontal" action="/dbsearch" method="GET">
+      <form class="form-horizontal" action="/dbsearch" method="GET" id="homepagediv">
         <fieldset>
 
 
           <!-- Search input-->
           <div class="control-group">
-          <h1 class="text-center">Search Seattle Dog-Friendly Restaurants!</h1>
+          <h1 class="text-center" id="hometitle">Find Seattle Dog-Friendly Restaurants!</h1>
             <!-- <label class="control-label" for="homesearch"></label>
             <div class="controls">
               <input id="homesearch" name="homesearch" type="text" placeholder="Enter Seattle Neighborhood" class="text-center form-control input-xlarge search-query">
@@ -23,7 +23,7 @@
           <div class="control-group">
             <label class="control-label" for="homesearchbutton"></label>
             <div class="controls">
-            <button id="homesearchbutton" name="homesearchbutton" class="btn btn-primary btn-block">Search</button>
+            <button id="homesearchbutton" name="homesearchbutton" class="btn btn-large btn-block">Search</button>
             </div>
           </div>
 

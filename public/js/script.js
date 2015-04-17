@@ -12,22 +12,22 @@ $('#openLogin').click(function(){
 
 //navbar modal form submit for signup
 
-$('#signupform').on('submit', function(e) {
-  e.preventDefault();
-  var signupUrl = $(this).attr('action')
-  var signupData = $(this).serialize();
-  $('#signupmodal').modal('hide');
-  $.ajax({
-    method: 'POST',
-    url: signupUrl,
-    data: signupData
-  }).done(function(data) {
-    console.log("signup complete", data)
-    // location.href=signupUrl;
-    // console.log(location.href)
-  })
+// $('#signupform').on('submit', function(e) {
+//   e.preventDefault();
+//   var signupUrl = $(this).attr('action')
+//   var signupData = $(this).serialize();
+//   $('#signupmodal').modal('hide');
+//   $.ajax({
+//     method: 'POST',
+//     url: signupUrl,
+//     data: signupData
+//   }).done(function(data) {
+//     console.log("signup complete", data)
+//     // location.href=signupUrl;
+//     // console.log(location.href)
+//   })
 
-})
+// })
 
 $("[data-toggle=tooltip]").tooltip();
 

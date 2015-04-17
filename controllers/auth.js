@@ -13,37 +13,33 @@ router.get('/',function(req,res){
 //POST /auth/signup
 //create new user in database
 router.post('/',function(req,res){
-    var userQuery = {email:req.body.email};
-    var userData = {
-        email:req.body.email,
-        name:req.body.name,
-        password:req.body.password
-    };
+  var userQuery = {email:req.body.email};
+  var userData = {
+    email:req.body.email,
+    name:req.body.name,
+    password:req.body.password
+  };
 
-    db.user.findOrCreate({where:userQuery,defaults:userData})
-      .spread(function(user,created) {
-          if(created) {
-            res.redirect('/');
-          } else {
-            req.flash("danger","Your email already exists in our system. Please login to continue, or signup with a new email.");
-            es.redirect("/dbsearch");
+  db.user.findOrCreate({where:userQuery,defaults:userData})
+  .spread(function(user,created) {
+    if(created) {
+      res.redirect('/');
+
+    } else {
+      req.flash("danger","Your email already exists in our system. Please login to continue, or signup with a new email.");
+      res.redirect("/");
 
             // res.send("Your email already exists! Please log in");
           }
-      })
-      .catch(function(error) {
-        console.log('error',error);
-        res.send(error);
-      })
+        })
+  .catch(function(error) {
+    req.flash("danger","Your password must be at least 6 characters in length.");
+    res.redirect("/");
+    console.log('error',error);
+    // res.send(error);
 
-    //do sign up here (add user to database)
-    // res.send(req.body);
+  })
 
-
-    //user is signed up forward them to the home page
-
-
-    // res.redirect('/');
 });
 
 //GET /auth/login
@@ -74,25 +70,23 @@ router.post('/login',function(req,res){
               };
               // res.send("Your password matched")
               // res.send(req.session.user)
-              res.redirect("/dbsearch")
+              res.redirect("/");
 
 
 
             } else {
               req.flash("danger","Your password is invalid!");
-              res.redirect("/dbsearch");
+              res.redirect("/");
               // res.send({error:  'Invalid password'})
             }
           })
         } else {
           req.flash("danger","We don't recognize your email, please check your information and try again. If you aren't a member, please signup now!");
-          res.redirect("/dbsearch");
+          res.redirect("/");
           // res.send({error: 'Unknown user, Please check your information'})
         }
       })
 
-    //user is logged in forward them to the home page
-    // res.redirect('/');
 });
 
 

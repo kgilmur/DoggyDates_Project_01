@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Merriweather:400,700,300' rel='stylesheet' type='text/css'>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Doggy Dates</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <link href="/css/styles.css" rel="stylesheet">
+  <script src="/js/script.js"></script>
+</head>
+
+
+<!-- Signup Modal -->
+<div id="signupmodal" class="modal fade" tabindex="-1" role="dialog">
+<% include alerts %>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h3 class="">Sign up now to join the community!</h3>
+            </div>
+            <div class="modal-body">
+
+            <form class="form-horizontal" id="signupform" method="POST" action="/auth/">
+              <fieldset>
+
+                <!-- Text input-->
+                <div class="control-group">
+                  <label class="control-label" for="signupname"></label>
+                  <div class="controls">
+                    <input id="signupname" name="name" type="text" placeholder="What is your name?" class="form-control input-xlarge">
+                  </div>
+                </div>
+
+
+                <!-- Text input-->
+                <div class="control-group">
+                  <label class="control-label" for="signupemailinput"></label>
+                  <div class="controls">
+                    <input id="signupemailinput" name="email" type="text" placeholder="What is your email?" class="form-control input-xlarge">
+
+                  </div>
+                </div>
+
+                <!-- Password input-->
+                <div class="control-group">
+                  <label class="control-label" for="passwordsignupinput"></label>
+                  <div class="controls">
+                    <input id="passwordsignupinput" name="password" type="password" placeholder="What password would you like?" class="form-control input-xlarge">
+
+                  </div>
+                </div>
+
+                <!-- Button -->
+                <div class="control-group">
+                  <label class="control-label" for="signupbutton"></label>
+                  <div class="controls">
+                    <button id="signupbutton" name="signupbutton" class="btn btn-primary">Sign me up!</button>
+                  </div>
+                </div>
+
+              </fieldset>
+            </form>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal -->
+
+<div id="loginmodal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h3 class="">Hello Again!</h3>
+                  <div class="login-modal-alert alert alert-danger hidden"> User not found. Please check your information and try agian. If you are new, please use the 'Sign up' link in the upper right-hand side of your screen.</div>
+
+            </div>
+            <div class="modal-body">
+
+            <form class="form-horizontal" id="loginform" method="POST" action="/auth/login">
+              <fieldset>
+
+                <!-- Text input-->
+                <div class="control-group">
+                  <label class="control-label" for="loginemailinput"></label>
+                  <div class="controls">
+                    <input id="loginemailinput" name="email" type="text" placeholder="Enter your email" class="form-control input-xlarge">
+
+                  </div>
+                </div>
+
+                <!-- Password input-->
+                <div class="control-group">
+                  <label class="control-label" for="passwordlogininput"></label>
+                  <div class="controls">
+                    <input id="passwordlogininput" name="password" type="password" placeholder="Enter your password" class="form-control input-xlarge">
+
+                  </div>
+                </div>
+
+                <!-- Button -->
+                <div class="control-group">
+                  <label class="control-label" for="loginbutton"></label>
+                  <div class="controls">
+                    <button id="loginbutton" name="loginbutton" class="btn btn-primary">Login!</button>
+                  </div>
+                </div>
+
+              </fieldset>
+            </form>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Navbar -->
+
+<div class="navcontainer">
+  <div class="navbar navbar-default navbar-fixed-top">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+      <img src="./images/dogsite-copy copy.png" class="pull-left" id="navbarimage"> Doggy Dates
+      </a>
+
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="/" class="">Home</a></li>
+        <li><a href="/dbsearch" class="searchnav">Search</a></li>
+        <li><a href="/favorites" class="favoritenav">Favorites</a></li>
+        <li><a href="/about" class="aboutnav">About</a></li>
+        <li class="divider-vertical"></li>
+
+        <% if(currentUser) { %>
+          <li><a href="/auth/logout" class="logoutnav">Logout</a></li>
+        <% }else{ %>
+          <li><a href="#" id="openLogin" class="loginnav">Login</a></li>
+          <li><a href="#" id="openSignup" class="signupnav">Sign Up</a></li>
+        <% } %>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<% include ../partials/alerts %>
+

@@ -27,20 +27,20 @@ router.post("/patioonly", function(req,res){
   var user= req.getUser();
   if (!user) {
     req.flash("danger","You are not logged in, please login or sign up in order to vote!")};
-    // return res.send("Log in")}
+    res.redirect("/");
   db.feature.count({where:{userId:user.id,venueId:req.body.venueId}}).then(function(count){
     console.log("COUNT!!!", count);
     if(count > 0){
       // return res.send({error: "You have already voted"})
       // alert("already voted")
       req.flash("danger","You have already voted for this restaurant!");
-      res.redirect("/dbsearch");
+      res.redirect("/");
     }else{
       db.feature.findOrCreate({where:{userId:user.id,venueId:req.body.venueId,type:req.body.patioonlyinput}})
         .spread(function(featureData, created){
           // console.log("test");
           // return res.send({vote: created});
-          res.redirect("/dbsearch");
+          res.redirect("/");
           // res.send("/dbsearch");
       }).catch(function(error) {
         console.log("error:",error);
@@ -55,18 +55,18 @@ router.post("/inside", function(req,res){
   var user= req.getUser();
   if (!user) {
     req.flash("danger","You are not logged in, please login or sign up in order to vote!")};
-    // return res.send("Please log in before voting")}
+    res.redirect("/");
   db.feature.count({where:{userId:user.id,venueId:req.body.venueId}}).then(function(count){
     console.log("COUNT!!!", count);
     if(count > 0){
       req.flash("danger","You have already voted for this restaurant!");
-      // return res.send({error: "You have already voted for this restaurant"})
+      res.redirect("/");
     }else{
       db.feature.findOrCreate({where:{userId:user.id,venueId:req.body.venueId,type:req.body.insideinput}})
         .spread(function(featureData, created){
           // console.log("test");
           // return res.send({vote: created});
-          res.redirect("/dbsearch");
+          res.redirect("/");
           // res.send("/dbsearch");
       }).catch(function(error) {
         console.log("error:",error);
