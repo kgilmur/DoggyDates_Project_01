@@ -43,6 +43,9 @@ body {
   background-image: url("../images/homepage.jpg") !important;
   background-size: 100%;
   background-position: fill;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 #hometitle {
