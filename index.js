@@ -80,7 +80,7 @@ app.post("/yelptodb", function(req, res) {
     defaults:{name: req.body.name,address:req.body.address,phone:req.body.phone,yelpRating:ratings,foodType:req.body.foodType}
   }).spread(function(data, created) {
     if(created) {
-      res.redirect("/");
+      res.redirect("/dbsearch");
     } else {
       req.flash("danger","This restaurant is already in our system! Please see the list of dog-friendly restaurants on this page!");
       res.redirect("/dbsearch");
