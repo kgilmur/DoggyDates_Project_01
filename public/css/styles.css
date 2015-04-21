@@ -216,5 +216,15 @@ margin-top: 50px;
   margin: 30px auto;
 }
 
+/* 404 Error Page*/
 
+#errortext {
+  background-color: white;
+  background: rgba(255, 255, 255, .5);
+  padding: 14px;
+  border-radius: 25px;
+  font-size: 30px;
+
+
+}
 

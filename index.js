@@ -146,7 +146,10 @@ app.use('/yelp',require('./controllers/yelp.js'));
 app.use('/features', require('./controllers/features.js'));
 app.use("/favorites", favoritesCtrl);
 
-
+//404 error message
+app.use(function(req, res, next){
+    res.status(404).render('pages/404');
+});
 
 
 app.listen(process.env.PORT || 3000)
