@@ -32,7 +32,7 @@ router.post('/',function(req,res){
           }
         })
   .catch(function(error) {
-    req.flash("danger","Your password must be at least 6 characters in length.");
+    req.flash("danger","Your password must be at least 6 characters in length, and you must use a valid email address.");
     res.redirect(req.headers.referer);
     console.log('error',error);
     // res.send(error);
